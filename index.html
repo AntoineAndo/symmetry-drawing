@@ -17,10 +17,29 @@
       src="https://kit.fontawesome.com/7dbdbb6936.js"
       crossorigin="anonymous"
     ></script>
+    <!-- Style inheritance -->
+    <script>
+      window.onload = function () {
+        // Get the iframe computed css values
+        if (window.parent) {
+          const parent = window.parent;
+          const parentStyles = window.getComputedStyle(
+            window.parent.document.querySelector("iframe")
+          );
+
+          // Apply the parent styles to the body
+          const body = document.querySelector("body");
+          body.style.color = parentStyles.color;
+          // Define css var --color
+          body.style.setProperty("--color", parentStyles.color);
+        }
+      };
+    </script>
     <title>Symetry drawing</title>
     <style>
       html,
       body {
+        --color: black;
         margin: 0;
         padding: 0;
         height: 100%;
@@ -38,7 +57,7 @@
         overflow-y: auto;
         padding-inline: 20px;
         z-index: 999;
-        width: 100%;
+        max-width: 100%;
         /* hide scrollbar */
         scrollbar-width: none;
         box-sizing: border-box;
@@ -75,7 +94,7 @@
 
         overflow: hidden;
 
-        color: white;
+        color: var(--color);
       }
 
       .toolbar.collapsed {
@@ -98,13 +117,13 @@
       .toolSelector {
         display: flex;
         align-items: center;
-        border: solid 1px white;
+        border: solid 1px var(--color);
         border-radius: 5px;
         overflow: hidden;
       }
 
       .toolSelector label {
-        border: solid 1px white;
+        border: solid 1px var(--color);
         padding: 5px;
       }
 
@@ -789,8 +808,6 @@
 
       canvas.addEventListener("pointermove", (e) => {
         absorbEvent(e);
-        console.log("move");
-
         updateCursor(e);
         onMouseAction(e);
         // var mouseEvent = new MouseEvent("mousemove", {
