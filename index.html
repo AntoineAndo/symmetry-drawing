@@ -28,14 +28,23 @@
 
         font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
           sans-serif;
+
+        position: relative;
+      }
+
+      .headerContainer {
+        position: absolute;
+        top: 20px;
+        overflow-y: auto;
+        padding-inline: 20px;
+        z-index: 999;
+        width: 100%;
+        /* hide scrollbar */
+        scrollbar-width: none;
+        box-sizing: border-box;
       }
 
       header {
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        z-index: 999;
-
         width: fit-content;
         height: 50px;
         box-sizing: border-box;
@@ -209,20 +218,21 @@
 
     <div class="ui">
       <!-- Header -->
-      <header class="glass">
-        <div class="toolbar">
-          <!-- Brush number -->
-          <div class="inputContainer">
-            <label for="nbBrushes">Number of brushes</label>
-            <input type="number" id="nbBrushes" value="4" />
-          </div>
+      <div class="headerContainer">
+        <header class="glass">
+          <div class="toolbar">
+            <!-- Brush number -->
+            <div class="inputContainer">
+              <label for="nbBrushes">Number of brushes</label>
+              <input type="number" id="nbBrushes" value="4" />
+            </div>
 
-          <!-- Rainbox stroke -->
-          <div class="inputContainer">
-            <label for="rainbow"> Rainbow stroke </label>
-            <input type="checkbox" id="rainbow" />
-          </div>
-          <!-- <div>
+            <!-- Rainbox stroke -->
+            <div class="inputContainer">
+              <label for="rainbow"> Rainbow stroke </label>
+              <input type="checkbox" id="rainbow" />
+            </div>
+            <!-- <div>
             <label for="controlPointsToggle">View control points</label>
             <input type="checkbox" id="controlPointsToggle" />
           </div>
@@ -230,45 +240,54 @@
             <label for="segmentsEndsToggle">View segment nodes</label>
             <input type="checkbox" id="segmentsEndsToggle" />
           </div> -->
-          <!-- 
+            <!-- 
             Tool selector
             Brush or eraser
           -->
-          <div class="toolSelector">
-            <!-- Brush -->
-            <div>
-              <label for="brush">
-                <i class="fa-solid fa-paint-brush"></i
-              ></label>
-              <input type="radio" id="brush" name="tool" checked />
+            <div class="toolSelector">
+              <!-- Brush -->
+              <div>
+                <label for="brush">
+                  <i class="fa-solid fa-paint-brush"></i
+                ></label>
+                <input type="radio" id="brush" name="tool" checked />
+              </div>
+              <!-- Eraser -->
+              <div>
+                <label for="erase"> <i class="fa-solid fa-eraser"></i></label>
+                <input type="radio" id="erase" name="tool" />
+              </div>
             </div>
-            <!-- Eraser -->
-            <div>
-              <label for="erase"> <i class="fa-solid fa-eraser"></i></label>
-              <input type="radio" id="erase" name="tool" />
+            <div class="inputContainer">
+              <label for="strokeWidth">Stroke width</label>
+              <input
+                type="range"
+                id="strokeWidth"
+                min="1"
+                max="100"
+                value="20"
+              />
             </div>
-          </div>
-          <div class="inputContainer">
-            <label for="strokeWidth">Stroke width</label>
-            <input type="range" id="strokeWidth" min="1" max="100" value="20" />
-          </div>
 
-          <div class="inputContainer">
-            <button id="shuffle">Shuffle colors</button>
+            <div class="inputContainer">
+              <button id="shuffle">Shuffle colors</button>
+            </div>
           </div>
-        </div>
-        <span id="collapse">
-          <i class="fa-solid fa-chevron-left"></i>
-        </span>
-        <!-- <div>
+          <span id="collapse">
+            <i class="fa-solid fa-chevron-left"></i>
+          </span>
+          <!-- <div>
           Subdivisions
           <input type="number" id="subdivisions" value="2" min="1" max="1000" />
         </div> -->
-      </header>
+        </header>
+      </div>
 
       <div class="actionsContainer">
         <!-- Clear drawing button -->
-        <button id="clearButton" class="glass">Clear</button>
+        <button id="clearButton" class="glass">
+          <i class="fa-solid fa-trash"></i>
+        </button>
 
         <!-- Download button -->
         <button
@@ -276,7 +295,7 @@
           popovertarget="downloadPopover"
           class="glass"
         >
-          Download
+          <i class="fa-solid fa-download"></i>
         </button>
       </div>
 
